@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tirumalasettyharika.github.io/studysync/sitemap.xml
