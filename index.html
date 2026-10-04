@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudySync | Student Productivity Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <span>📚</span>
+
+            <h2>StudySync</h2>
+
+        </div>
+
+
+        <nav>
+
+            <a href="#dashboard" class="active">
+                🏠 Dashboard
+            </a>
+
+            <a href="#tasks">
+                ✅ My Tasks
+            </a>
+
+            <a href="#focus">
+                ⏱️ Focus Timer
+            </a>
+
+            <a href="#schedule">
+                📅 Schedule
+            </a>
+
+            <a href="#progress">
+                📊 Progress
+            </a>
+            <a href="#analytics">📈 Analytics</a>
+
+            <a href="#notes">
+                📝 Notes
+            </a>
+            
+            <a href="#streaks">🔥 Daily Streaks</a>
+
+        </nav>
+
+
+        <button id="themeToggle" class="theme-btn">
+            🌙 Dark Mode
+        </button>
+
+    </aside>
+
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+
+        <!-- ================= TOP BAR ================= -->
+
+        <header class="topbar">
+            <div class="global-search">
+            
+                <span>🔎</span>
+            
+                <input type="text" id="globalSearch" placeholder="Search tasks, notes, subjects..." oninput="globalSearchItems()">
+            
+            </div>
+
+            <div>
+
+                <p class="welcome-small">
+                    Welcome back 👋
+                </p>
+
+                <h1>
+                    Study Dashboard
+                </h1>
+
+            </div>
+
+
+            <div class="profile">
+
+                <div class="profile-icon">
+                    H
+                </div>
+
+                <span>
+                    Student
+                </span>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section id="dashboard" class="section">
+
+            <div class="hero-card">
+
+                <div>
+
+                    <p class="hero-label">
+                        YOUR STUDY SPACE
+                    </p>
+
+
+                    <h2>
+                        Plan. Focus.<br>
+                        Achieve. 🚀
+                    </h2>
+
+
+                    <p>
+                        Stay organized, manage your tasks,
+                        and make every study session count.
+                    </p>
+
+
+                    <button class="primary-btn" onclick="scrollToTasks()">
+                        View My Tasks →
+                    </button>
+
+                </div>
+
+
+                <div class="hero-icon">
+                    📖
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= STAT CARDS ================= -->
+
+            <div class="stats-grid">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        📝
+                    </div>
+
+                    <div>
+
+                        <h3 id="taskCount">
+                            0
+                        </h3>
+
+                        <p>
+                            Total Tasks
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        ✅
+                    </div>
+
+                    <div>
+
+                        <h3 id="completedCount">
+                            0
+                        </h3>
+
+                        <p>
+                            Completed
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🔥
+                    </div>
+
+                    <div>
+
+                        <h3 id="streakCount">
+                            0
+                        </h3>
+
+                        <p>
+                            Study Streak
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🎯
+                    </div>
+
+                    <div>
+
+                        <h3 id="progressPercent">
+                            0%
+                        </h3>
+
+                        <p>
+                            Task Progress
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+        <!-- ================= QUICK ACTIONS ================= -->
+        
+        <div class="quick-actions">
+        
+            <button onclick="scrollToTasks()">
+                <span>➕</span>
+                <div>
+                    <strong>Add Task</strong>
+                    <small>Create a new study task</small>
+                </div>
+            </button>
+        
+            <button onclick="scrollToFocus()">
+                <span>⏱️</span>
+                <div>
+                    <strong>Start Focus</strong>
+                    <small>Begin a focus session</small>
+                </div>
+            </button>
+        
+            <button onclick="scrollToNotes()">
+                <span>📝</span>
+                <div>
+                    <strong>Write Note</strong>
+                    <small>Save a quick study note</small>
+                </div>
+            </button>
+        
+            <button onclick="scrollToProgress()">
+                <span>📊</span>
+                <div>
+                    <strong>Track Progress</strong>
+                    <small>Check your study growth</small>
+                </div>
+            </button>
+        
+        </div>
+        <!-- ================= RECENT ACTIVITY ================= -->
+        
+        <section id="activity" class="section">
+        
+            <div class="section-heading">
+        
+                <div>
+                    <p class="section-label">
+                        RECENT UPDATES
+                    </p>
+        
+                    <h2>
+                        Recent Activity
+                    </h2>
+                </div>
+        
+            </div>
+        
+            <div id="activityList" class="activity-list">
+                <!-- Activities appear here -->
+            </div>
+        
+        </section>
+
+
+
+        <!-- ================= TASKS ================= -->
+
+        <section id="tasks" class="section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="section-label">
+                        PRODUCTIVITY
+                    </p>
+
+                    <h2>
+                        My Tasks
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="task-input">
+
+
+                <input type="text" id="taskInput" placeholder="Enter a new study task...">
+
+
+
+                <div class="priority-select" id="prioritySelect">
+
+
+                    <button type="button" class="priority-selected" onclick="togglePriorityMenu()">
+
+                        <span id="selectedPriority">
+                            🟡 Medium Priority
+                        </span>
+
+                        <span class="priority-arrow">
+                            ⌄
+                        </span>
+
+                    </button>
+
+
+
+                    <div class="priority-menu" id="priorityMenu">
+
+                        <div class="priority-option high" onclick="selectPriority('high', '🔴 High Priority')">
+                            🔴 High Priority
+                        </div>
+
+
+                        <div class="priority-option medium" onclick="selectPriority('medium', '🟡 Medium Priority')">
+                            🟡 Medium Priority
+                        </div>
+
+
+                        <div class="priority-option low" onclick="selectPriority('low', '🟢 Low Priority')">
+                            🟢 Low Priority
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <button onclick="addTask()">
+                    + Add Task
+                </button>
+
+            </div>
+
+
+
+            <div id="taskList" class="task-list">
+
+                <!-- Tasks appear here -->
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= FOCUS TIMER ================= -->
+
+        <section id="focus" class="section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="section-label">
+                        DEEP WORK
+                    </p>
+
+                    <h2>
+                        Focus Timer
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="focus-card">
+
+
+                <div class="focus-header">
+
+                    <span class="focus-status">
+                        ● READY TO FOCUS
+                    </span>
+
+                    <span class="focus-mode">
+                        POMODORO
+                    </span>
+
+                </div>
+
+
+
+                <div class="timer-ring">
+
+                    <div class="timer-inner">
+
+                        <p>
+                            FOCUS SESSION
+                        </p>
+
+
+                        <div id="timerDisplay">
+                            25:00
+                        </div>
+
+
+                        <span>
+                            Stay focused. You've got this.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="timer-controls">
+
+
+                    <button class="timer-start" onclick="startTimer()">
+                        ▶ Start
+                    </button>
+
+
+                    <button class="timer-pause" onclick="pauseTimer()">
+                        ⏸ Pause
+                    </button>
+
+
+                    <button class="timer-reset" onclick="resetTimer()">
+                        ↻ Reset
+                    </button>
+
+
+                </div>
+
+
+
+                <div class="timer-presets">
+
+
+                    <button onclick="setTimer(25)">
+                        25 min
+                    </button>
+
+
+                    <button onclick="setTimer(50)">
+                        50 min
+                    </button>
+
+
+                    <button onclick="customTimer()">
+                        Custom
+                    </button>
+
+
+                </div>
+
+
+
+                <p class="focus-tip">
+                    💡 Tip: Put your phone away and focus on one task.
+                </p>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= SCHEDULE ================= -->
+
+        <section id="schedule" class="section">
+
+
+            <div class="section-heading">
+
+
+                <div>
+
+                    <p class="section-label">
+                        YOUR ROUTINE
+                    </p>
+
+                    <h2>
+                        Study Schedule
+                    </h2>
+
+                </div>
+
+
+
+                <button type="button" class="schedule-add-btn" onclick="openScheduleForm()">
+                    + Add Custom
+                </button>
+
+
+            </div>
+
+
+
+            <!-- SCHEDULE LIST -->
+
+            <div id="scheduleList" class="schedule-grid">
+
+                <!-- Schedule cards appear here -->
+
+            </div>
+
+
+
+            <!-- CUSTOM SCHEDULE FORM -->
+
+            <div id="scheduleForm" class="schedule-form" style="display: none;">
+
+
+                <h3>
+                    Add Custom Schedule
+                </h3>
+
+
+
+                <input type="text" id="customSubject" placeholder="Subject name">
+
+
+
+                <select id="customDay">
+
+                    <option value="Monday">
+                        Monday
+                    </option>
+
+                    <option value="Tuesday">
+                        Tuesday
+                    </option>
+
+                    <option value="Wednesday">
+                        Wednesday
+                    </option>
+
+                    <option value="Thursday">
+                        Thursday
+                    </option>
+
+                    <option value="Friday">
+                        Friday
+                    </option>
+
+                    <option value="Saturday">
+                        Saturday
+                    </option>
+
+                    <option value="Sunday">
+                        Sunday
+                    </option>
+
+                </select>
+
+
+
+                <input type="time" id="customTime" step="1">
+
+
+
+                <div class="schedule-form-actions">
+
+
+                    <button type="button" onclick="addCustomSchedule()">
+                        Add Schedule
+                    </button>
+
+
+
+                    <button type="button" class="schedule-cancel" onclick="closeScheduleForm()">
+                        Cancel
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+    <!-- ================= STUDY PROGRESS ================= -->
+    
+    <section id="progress" class="section">
+    
+        <div class="section-heading">
+    
+            <div>
+                <p class="section-label">
+                    YOUR GROWTH
+                </p>
+    
+                <h2>
+                    Study Progress
+                </h2>
+            </div>
+    
+        </div>
+    
+    
+        <!-- ADD SUBJECT -->
+    
+        <div class="progress-form">
+    
+            <input type="text" id="progressSubject" placeholder="Enter subject...">
+    
+            <input type="number" id="totalTopics" placeholder="Total topics" min="1">
+    
+            <button type="button" onclick="addSubjectProgress()">
+                + Add Subject
+            </button>
+    
+        </div>
+    
+    
+        <!-- SUBJECT LIST -->
+    
+        <div id="progressList" class="progress-grid">
+    
+            <!-- Subject cards will appear here -->
+    
+        </div>
+    
+    </section>
+    <!-- ================= DAILY STREAKS ================= -->
+    
+    <section id="streaks" class="section">
+    
+        <div class="section-heading">
+    
+            <div>
+                <p class="section-label">
+                    KEEP GOING
+                </p>
+    
+                <h2>
+                    Daily Streaks 🔥
+                </h2>
+            </div>
+    
+        </div>
+    
+        <div class="streak-dashboard">
+    
+            <div class="streak-main-card">
+    
+                <div class="streak-flame">
+                    🔥
+                </div>
+    
+                <p class="streak-label">
+                    CURRENT STREAK
+                </p>
+    
+                <h3 id="currentStreak">
+                    0
+                </h3>
+    
+                <span>
+                    days
+                </span>
+    
+                <p id="streakMessage">
+                    Start your study journey today.
+                </p>
+    
+            </div>
+    
+    
+            <div class="streak-stat-card">
+    
+                <span class="streak-stat-icon">
+                    🏆
+                </span>
+    
+                <div>
+                    <p>
+                        BEST STREAK
+                    </p>
+    
+                    <h3 id="bestStreak">
+                        0 days
+                    </h3>
+                </div>
+    
+            </div>
+    
+    
+            <div class="streak-stat-card">
+    
+                <span class="streak-stat-icon">
+                    📅
+                </span>
+    
+                <div>
+                    <p>
+                        TODAY
+                    </p>
+    
+                    <h3 id="todayStatus">
+                        Not Started
+                    </h3>
+                </div>
+    
+            </div>
+    
+        </div>
+    
+    
+        <div class="weekly-streak-card">
+    
+            <div class="weekly-header">
+    
+                <div>
+                    <p class="section-label">
+                        LAST 7 DAYS
+                    </p>
+    
+                    <h3>
+                        Your Study Activity
+                    </h3>
+                </div>
+    
+                <span id="weeklyCount">
+                    0 / 7 days
+                </span>
+    
+            </div>
+    
+    
+            <div id="weeklyStreak" class="weekly-streak">
+                <!-- Days appear here -->
+            </div>
+    
+        </div>
+    
+    </section>
+    <!-- ================= STUDY ANALYTICS ================= -->
+    
+    <section id="analytics" class="section">
+    
+        <div class="section-heading">
+    
+            <div>
+                <p class="section-label">
+                    YOUR INSIGHTS
+                </p>
+    
+                <h2>
+                    Study Analytics 📈
+                </h2>
+            </div>
+    
+        </div>
+    
+    
+        <div class="analytics-grid">
+    
+            <div class="analytics-card">
+                <span class="analytics-icon">📚</span>
+                <div>
+                    <p>Total Subjects</p>
+                    <h3 id="analyticsSubjects">0</h3>
+                </div>
+            </div>
+    
+    
+            <div class="analytics-card">
+                <span class="analytics-icon">✅</span>
+                <div>
+                    <p>Topics Completed</p>
+                    <h3 id="analyticsTopics">0</h3>
+                </div>
+            </div>
+    
+    
+            <div class="analytics-card">
+                <span class="analytics-icon">📝</span>
+                <div>
+                    <p>Tasks Completed</p>
+                    <h3 id="analyticsTasks">0</h3>
+                </div>
+            </div>
+    
+    
+            <div class="analytics-card">
+                <span class="analytics-icon">🔥</span>
+                <div>
+                    <p>Current Streak</p>
+                    <h3 id="analyticsStreak">0 days</h3>
+                </div>
+            </div>
+    
+        </div>
+    
+    
+        <div class="analytics-overview">
+    
+            <div class="analytics-overview-header">
+    
+                <div>
+                    <p class="section-label">
+                        OVERALL PROGRESS
+                    </p>
+    
+                    <h3>
+                        Your Study Performance
+                    </h3>
+                </div>
+    
+                <span id="analyticsProgress">
+                    0%
+                </span>
+    
+            </div>
+    
+    
+            <div class="analytics-progress-bar">
+    
+                <div id="analyticsProgressFill" class="analytics-progress-fill"></div>
+    
+            </div>
+    
+    
+            <div class="analytics-summary">
+    
+                <div>
+                    <span>📚</span>
+                    <p>
+                        Subjects you're tracking
+                    </p>
+                </div>
+    
+                <div>
+                    <span>🎯</span>
+                    <p>
+                        Topics completed
+                    </p>
+                </div>
+    
+                <div>
+                    <span>⚡</span>
+                    <p>
+                        Tasks finished
+                    </p>
+                </div>
+    
+            </div>
+    
+        </div>
+    
+    </section>
+        <!-- ================= NOTES ================= -->
+
+        <section id="notes" class="section">
+
+
+            <div class="section-heading">
+
+
+                <div>
+
+                    <p class="section-label">
+                        QUICK NOTES
+                    </p>
+
+                    <h2>
+                        Study Notes
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="notes-container">
+
+
+                <div class="notes-input">
+
+
+                    <input type="text" id="noteTitle" placeholder="Note title...">
+
+
+
+                    <textarea id="noteContent" placeholder="Write your study note here..."></textarea>
+
+
+
+                    <button onclick="addNote()">
+                        + Save Note
+                    </button>
+
+
+                </div>
+
+
+
+                <div id="notesList" class="notes-list">
+
+                    <!-- Notes appear here -->
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer>
+
+            <p>
+                © 2026 StudySync · Built with HTML, CSS & JavaScript
+            </p>
+
+        </footer>
+
+
+    </main>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
